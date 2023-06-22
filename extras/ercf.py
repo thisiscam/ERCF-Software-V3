@@ -18,9 +18,11 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 #
-import logging, logging.handlers, threading, queue, time
+import logging, logging.handlers, threading, queue, time, contextlib
 import textwrap, math, os.path, re, json
 from random import randint
+import chelper
+
 
 # Forward all messages through a queue (polled by background thread)
 class QueueHandler(logging.Handler):
@@ -168,7 +170,7 @@ class Ercf:
         self.printer.register_event_handler("klippy:ready", self.handle_ready)
 
         # ERCF hardware (steppers, servo, encoder and optional toolhead sensor)
-        self.selector_stepper = self.gear_stepper = self.toolhead_sensor = self.encoder_sensor = self.servo = None
+        self.selector_stepper = self.gear_stepper = self.toolhead_sensor = self.toolhead_sensor_mcu_endstop = self.encoder_sensor = self.servo = None
 
         # Specific build parameters / tuning
         self.version = config.getfloat('version', 1.1)
@@ -463,24 +465,14 @@ class Ercf:
                     self.cmd_ERCF_CHECK_GATES,
                     desc = self.cmd_ERCF_CHECK_GATES_help)
 
-    def handle_connect(self):
-        # Setup background file based logging before logging any messages
-        if self.logfile_level >= 0:
-            logfile_path = self.printer.start_args['log_file']
-            dirname = os.path.dirname(logfile_path)
-            if dirname == None:
-                ercf_log = '/tmp/ercf.log'
-            else:
-                ercf_log = dirname + '/ercf.log'
-            self._log_debug("ercf_log=%s" % ercf_log)
-            self.queue_listener = QueueListener(ercf_log)
-            self.queue_listener.setFormatter(MultiLineFormatter('%(asctime)s %(message)s', datefmt='%I:%M:%S'))
-            queue_handler = QueueHandler(self.queue_listener.bg_queue)
-            self.ercf_logger = logging.getLogger('ercf')
-            self.ercf_logger.setLevel(logging.INFO)
-            self.ercf_logger.addHandler(queue_handler)
+        # We setup hardware during configuration since some hardware like endstop
+        # requires configuration during the MCU config phase, which happens before
+        # klipper connection
+        # This assumes that the hardware configuartion appears before the `ercf` section
+        # the installer by default already guarantees this order
+        self._setup_hardware()
 
-        self.toolhead = self.printer.lookup_object('toolhead')
+    def _setup_hardware(self):
         for manual_stepper in self.printer.lookup_objects('manual_stepper'):
             stepper_name = manual_stepper[1].get_steppers()[0].get_name()
             if stepper_name == 'manual_stepper selector_stepper':
@@ -495,19 +487,26 @@ class Ercf:
             raise self.config.error("Missing [manual_extruder_stepper gear_stepper] definition in ercf_hardware.cfg\n%s" % self.UPGRADE_REMINDER)
 
         try:
-            self.pause_resume = self.printer.lookup_object('pause_resume')
-        except:
-            raise self.config.error("ERCF requires [pause_resume] to work, please add it to your config!")
-
-        try:
             self.toolhead_sensor = self.printer.lookup_object("filament_switch_sensor toolhead_sensor")
         except:
             self.toolhead_sensor = None
             if not self.home_to_extruder:
                 self.home_to_extruder = 1
                 self._log_debug("No toolhead sensor detected, forcing 'home_to_extruder: 1'")
+        
         if self.toolhead_sensor and self.toolhead_sensor.runout_helper.runout_pause:
             raise self.config.error("`pause_on_runout: False` is incorrect/missing from toolhead_sensor configuration")
+
+        if self.toolhead_sensor:
+            endstop_pin = self.config.getsection("filament_switch_sensor toolhead_sensor").get("switch_pin")
+            # setup toolhead sensor pin as an endstop
+            ppins = self.printer.lookup_object('pins')
+            ppins.allow_multi_use_pin(endstop_pin)
+            self.toolhead_sensor_mcu_endstop = ppins.setup_pin('endstop', endstop_pin)
+            for s in self.gear_stepper.steppers:
+                self.toolhead_sensor_mcu_endstop.add_stepper(s)
+            ffi_main, ffi_lib = chelper.get_ffi()
+            self.toolhead_homing_sk = ffi_main.gc(ffi_lib.cartesian_stepper_alloc(b'x'), ffi_lib.free)
 
         # Get endstops
         self.query_endstops = self.printer.lookup_object('query_endstops')
@@ -529,11 +528,6 @@ class Ercf:
         self.encoder_sensor = self.printer.lookup_object('ercf_encoder ercf_encoder', None)
         if not self.encoder_sensor:
             raise self.config.error("Missing [ercf_encoder] definition in ercf_hardware.cfg\n%s" % self.UPGRADE_REMINDER)
-
-        # Sanity check extruder name
-        self.extruder = self.printer.lookup_object(self.extruder_name, None)
-        if not self.extruder:
-            raise self.config.error("Extruder named `%s` not found on printer" % self.extruder_name)
 
         # See if we have a TMC controller capable of current control for filament collision detection and syncing
         # on gear_stepper and tip forming on extruder
@@ -558,8 +552,38 @@ class Ercf:
         if self.extruder_tmc is None:
             self._log_debug("TMC driver not found for extruder, cannot use current increase for tip forming move")
 
+
+    def handle_connect(self):
+        # Setup background file based logging before logging any messages
+        if self.logfile_level >= 0:
+            logfile_path = self.printer.start_args['log_file']
+            dirname = os.path.dirname(logfile_path)
+            if dirname == None:
+                ercf_log = '/tmp/ercf.log'
+            else:
+                ercf_log = dirname + '/ercf.log'
+            self._log_debug("ercf_log=%s" % ercf_log)
+            self.queue_listener = QueueListener(ercf_log)
+            self.queue_listener.setFormatter(MultiLineFormatter('%(asctime)s %(message)s', datefmt='%I:%M:%S'))
+            queue_handler = QueueHandler(self.queue_listener.bg_queue)
+            self.ercf_logger = logging.getLogger('ercf')
+            self.ercf_logger.setLevel(logging.INFO)
+            self.ercf_logger.addHandler(queue_handler)
+
         if self.enable_endless_spool == 1 and self.enable_clog_detection == 0:
             self._log_info("Warning: EndlessSpool mode requires clog detection to be enabled")
+
+        self.toolhead = self.printer.lookup_object('toolhead')
+
+        # Sanity check extruder name
+        self.extruder = self.printer.lookup_object(self.extruder_name, None)
+        if not self.extruder:
+            raise self.config.error("Extruder named `%s` not found on printer" % self.extruder_name)
+
+        try:
+            self.pause_resume = self.printer.lookup_object('pause_resume')
+        except:
+            raise self.config.error("ERCF requires [pause_resume] to work, please add it to your config!")
 
         self.ref_step_dist=self.gear_stepper.steppers[0].get_step_dist()
         self.variables = self.printer.lookup_object('save_variables').allVariables
@@ -1931,6 +1955,7 @@ class Ercf:
                 self._servo_down()
             else:
                 self._servo_up()
+
         if self.gear_stepper.is_synced() != sync:
             self._log_debug("%s gear stepper and extruder" % ("Syncing" if sync else "Unsyncing"))
             self.gear_stepper.sync_to_extruder(self.extruder_name if sync else None)
@@ -1944,6 +1969,53 @@ class Ercf:
         elif not sync and self.gear_tmc and self.gear_tmc.get_status(0)['run_current'] < self.gear_stepper_run_current:
             self._log_info("Restoring gear_stepper run current to 100% configured")
             self.gcode.run_script_from_command("SET_TMC_CURRENT STEPPER=gear_stepper CURRENT=%.2f" % self.gear_stepper_run_current)
+
+
+    @contextlib.contextmanager
+    def _sync_toolhead_to_gear(self, disable_encoder = False):
+        if disable_encoder:
+            self._disable_encoder_sensor()
+        toolhead_stepper = self.extruder.extruder_stepper.stepper
+        # switch gear stepper to manual mode
+        gear_stepper_mq = self.gear_stepper.motion_queue
+        self.gear_stepper.sync_to_extruder(None)
+        # Sync toolhead to gear
+        # We do this by injecting the toolhead stepper into the gear stepper's rail
+        prev_gear_steppers = self.gear_stepper.steppers
+        prev_gear_rail_steppers = self.gear_stepper.rail.steppers
+        self.gear_stepper.steppers = self.gear_stepper.steppers + [toolhead_stepper]
+        self.gear_stepper.rail.steppers = self.gear_stepper.rail.steppers + [toolhead_stepper]
+        gear_trapq = self.gear_stepper.trapq
+        prev_toolhead_trapq = toolhead_stepper.set_trapq(gear_trapq)
+        prev_toolhead_sk = toolhead_stepper.set_stepper_kinematics(self.toolhead_homing_sk)
+        # yield to caller
+        yield self
+        # Restore previous state
+        self.gear_stepper.steppers = prev_gear_steppers
+        self.gear_stepper.rail.steppers = prev_gear_rail_steppers
+        toolhead_stepper.set_trapq(prev_toolhead_trapq)
+        toolhead_stepper.set_stepper_kinematics(prev_toolhead_sk)
+        self.gear_stepper.sync_to_extruder(gear_stepper_mq)
+        if disable_encoder:
+            self._enable_encoder_sensor()
+
+
+    def _gear_home_to_endstop(self, endstop, movepos, speed=10, accel=100, triggered=True, check_trigger=True):
+        self.gear_stepper.do_set_position(-movepos)
+        name = self.gear_stepper.steppers[0].get_name(short=True)
+        gear_stepper_rail_endstops = self.gear_stepper.rail.endstops
+        self.gear_stepper.rail.endstops = [(endstop, name)]
+        # TODO: implement "twice homing"?
+        try:
+            homing_result = self.gear_stepper.do_homing_move(
+                0,
+                speed=speed,
+                accel=accel,
+                triggered=triggered,
+                check_trigger=check_trigger)
+        finally:
+            self.gear_stepper.rail.endstops = gear_stepper_rail_endstops
+        return homing_result
 
 
 ###########################
@@ -2127,15 +2199,14 @@ class Ercf:
 
         if self.sync_load_extruder and not skip_entry_moves:
             # Newer simplified forced full sync move
-            self._sync_gear_to_extruder(True, servo=True)
-            step = self.toolhead_homing_step
-            self._log_debug("Synchronized homing to toolhead sensor, up to %.1fmm in %.1fmm steps" % (self.toolhead_homing_max, step))
-            for i in range(int(self.toolhead_homing_max / step)):
-                msg = "Homing step #%d" % (i+1)
-                delta = self._trace_filament_move(msg, step, speed=10, motor="synced")
-                if self.toolhead_sensor.runout_helper.filament_present:
-                    self._log_debug("Toolhead sensor reached after %.1fmm (%d moves)" % (step*(i+1), i+1))
-                    break
+            with self._sync_toolhead_to_gear(disable_encoder=True):
+                self._gear_home_to_endstop(
+                    self.toolhead_sensor_mcu_endstop,
+                    self.toolhead_homing_max,
+                    speed=10, # TODO: make these speed/accel configurable?
+                    accel=self.gear_homing_accel,
+                    triggered=True,
+                    check_trigger=False)
         else:
             # Original method either synced or extruder only
             sync = not skip_entry_moves and self.sync_load_length > 0.
