@@ -105,6 +105,11 @@ class ManualExtruderStepper(kinematics_extruder.ExtruderStepper, manual_stepper.
                                    self.name, self.cmd_MANUAL_STEPPER,
                                    desc=self.cmd_MANUAL_STEPPER_help)
 
+    def find_past_position(self, print_time):
+        """Reports the position of the first stepper"""
+        stepper = self.steppers[0]
+        mcu_pos = stepper.get_past_mcu_position(print_time)
+        return stepper.mcu_to_commanded_position(mcu_pos)
 
     def do_enable(self, enable):
         assert self.motion_queue is None
