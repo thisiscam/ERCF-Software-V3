@@ -1971,7 +1971,7 @@ class Ercf:
     def _sync_toolhead_to_gear(self, disable_encoder = False):
         if disable_encoder:
             self._disable_encoder_sensor()
-        toolhead_stepper = self.extruder.extruder_stepper.stepper
+        toolhead_stepper = self.extruder.extruder_stepper.steppers[0]
         # switch gear stepper to manual mode
         gear_stepper_mq = self.gear_stepper.motion_queue
         self.gear_stepper.sync_to_extruder(None)
