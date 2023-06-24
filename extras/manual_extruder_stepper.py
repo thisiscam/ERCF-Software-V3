@@ -32,7 +32,6 @@ class PrinterRailWithMockEndstop(stepper.PrinterRail):
             self.endstops = [(self.MockEndstop(), "")] # hack: pretend we have endstops
         return super(PrinterRailWithMockEndstop, self).add_extra_stepper(*args, **kwargs)
 
-    def 
 
 class ManualExtruderStepper(kinematics_extruder.ExtruderStepper, manual_stepper.ManualStepper, object):
     """Extruder stepper that can be manually controlled when it is not synced to its motion queue"""
