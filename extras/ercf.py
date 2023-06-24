@@ -169,7 +169,7 @@ class Ercf:
         self.printer.register_event_handler("klippy:ready", self.handle_ready)
 
         # ERCF hardware (steppers, servo, encoder and optional toolhead sensor)
-        self.selector_stepper = self.gear_stepper = self.toolhead_sensor = self.toolhead_sensor_mcu_endstop = self.encoder_sensor = self.servo = None
+        self.selector_stepper = self.gear_stepper = self.toolhead_sensor = self.toolhead_stepper = self.toolhead_sensor_mcu_endstop = self.encoder_sensor = self.servo = None
 
         # Specific build parameters / tuning
         self.version = config.getfloat('version', 1.1)
@@ -482,8 +482,12 @@ class Ercf:
             stepper_name = manual_stepper[1].get_steppers()[0].get_name()
             if stepper_name == 'manual_extruder_stepper gear_stepper':
                 self.gear_stepper = manual_stepper[1]
+            if stepper_name == "manual_extruder_stepper extruder":
+                self.toolhead_stepper = manual_stepper[1]
         if self.gear_stepper is None:
             raise self.config.error("Missing [manual_extruder_stepper gear_stepper] definition in ercf_hardware.cfg\n%s" % self.UPGRADE_REMINDER)
+        if self.toolhead_stepper is None:
+            raise self.config.error("Missing [manual_extruder_stepper extruder] definition in ercf_hardware.cfg\n%s" % self.UPGRADE_REMINDER)
 
         try:
             self.toolhead_sensor = self.printer.lookup_object("filament_switch_sensor toolhead_sensor")
@@ -503,6 +507,8 @@ class Ercf:
             ppins.allow_multi_use_pin(endstop_pin)
             self.toolhead_sensor_mcu_endstop = ppins.setup_pin('endstop', endstop_pin)
             for s in self.gear_stepper.steppers:
+                self.toolhead_sensor_mcu_endstop.add_stepper(s)
+            for s in self.toolhead_stepper.steppers:
                 self.toolhead_sensor_mcu_endstop.add_stepper(s)
             ffi_main, ffi_lib = chelper.get_ffi()
             self.toolhead_homing_sk = ffi_main.gc(ffi_lib.cartesian_stepper_alloc(b'x'), ffi_lib.free)
@@ -578,6 +584,9 @@ class Ercf:
         self.extruder = self.printer.lookup_object(self.extruder_name, None)
         if not self.extruder:
             raise self.config.error("Extruder named `%s` not found on printer" % self.extruder_name)
+
+        self.extruder.extruder_stepper = self.toolhead_stepper
+        self.toolhead_stepper.sync_to_extruder(self.extruder_name)
 
         try:
             self.pause_resume = self.printer.lookup_object('pause_resume')
