@@ -396,6 +396,7 @@ class Ercf:
         self.gcode.register_command('ERCF_EJECT',
                     self.cmd_ERCF_EJECT,
                     desc = self.cmd_ERCF_EJECT_help)
+        self.gcode.register_command('PAUL', self.cmd_PAUL, desc="debug")
         self.gcode.register_command('ERCF_UNLOCK',
                     self.cmd_ERCF_UNLOCK,
                     desc = self.cmd_ERCF_UNLOCK_help)
@@ -2862,6 +2863,17 @@ class Ercf:
 
 
 ### CORE GCODE COMMANDS ##########################################################
+
+    def cmd_PAUL(self, gcmd):
+        self.length = gcmd.get_int('LENGTH', 50, minval=1, maxval=200)
+        with self._sync_toolhead_to_gear(disable_encoder=True):
+            self._gear_home_to_endstop(
+                self.toolhead_sensor_mcu_endstop,
+                length,
+                speed=1,
+                accel=self.gear_homing_accel,
+                triggered=True,
+                check_trigger=False)
 
     cmd_ERCF_UNLOCK_help = "Unlock ERCF operations"
     def cmd_ERCF_UNLOCK(self, gcmd):
