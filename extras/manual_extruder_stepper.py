@@ -32,6 +32,7 @@ class PrinterRailWithMockEndstop(stepper.PrinterRail):
             self.endstops = [(self.MockEndstop(), "")] # hack: pretend we have endstops
         return super(PrinterRailWithMockEndstop, self).add_extra_stepper(*args, **kwargs)
 
+    def 
 
 class ManualExtruderStepper(kinematics_extruder.ExtruderStepper, manual_stepper.ManualStepper, object):
     """Extruder stepper that can be manually controlled when it is not synced to its motion queue"""
@@ -45,10 +46,9 @@ class ManualExtruderStepper(kinematics_extruder.ExtruderStepper, manual_stepper.
 
         # Setup stepper
         self.can_home = True
-        self.stepper = PrinterRailWithMockEndstop(config, need_position_minmax=False, default_position_endstop=0.)
-        self.steppers = self.stepper.get_steppers()
-
-        self.rail = self.stepper # For forwarding manual_stepper...
+        self.rail = PrinterRailWithMockEndstop(config, need_position_minmax=False, default_position_endstop=0.) # For forwarding manual_stepper...
+        self.steppers = self.rail.get_steppers()
+        self.stepper = self.steppers[0]
 
         self.velocity = config.getfloat('velocity', 5., above=0.)
         self.accel = self.homing_accel = config.getfloat('accel', 0., minval=0.)
@@ -104,12 +104,6 @@ class ManualExtruderStepper(kinematics_extruder.ExtruderStepper, manual_stepper.
         gcode.register_mux_command('MANUAL_STEPPER', "STEPPER",
                                    self.name, self.cmd_MANUAL_STEPPER,
                                    desc=self.cmd_MANUAL_STEPPER_help)
-
-    def find_past_position(self, print_time):
-        """Reports the position of the first stepper"""
-        stepper = self.steppers[0]
-        mcu_pos = stepper.get_past_mcu_position(print_time)
-        return stepper.mcu_to_commanded_position(mcu_pos)
 
     def do_enable(self, enable):
         assert self.motion_queue is None
