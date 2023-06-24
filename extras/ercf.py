@@ -2874,7 +2874,7 @@ class Ercf:
 ### CORE GCODE COMMANDS ##########################################################
 
     def cmd_PAUL(self, gcmd):
-        self.length = gcmd.get_int('LENGTH', 50, minval=1, maxval=200)
+        length = gcmd.get_int('LENGTH', 50, minval=1, maxval=200)
         with self._sync_toolhead_to_gear(disable_encoder=True):
             self._gear_home_to_endstop(
                 self.toolhead_sensor_mcu_endstop,
