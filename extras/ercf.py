@@ -74,7 +74,7 @@ class Ercf:
     BOOT_DELAY = 1.5            # Delay before running bootup tasks
 
     LONG_MOVE_THRESHOLD = 70.   # This is also the initial move to load past encoder
-    ENCODER_MIN = 1.0           # The threshold (mm) that determines real encoder movement (ignore erroneous pulse)
+    ENCODER_MIN = 1.5           # The threshold (mm) that determines real encoder movement (ignore erroneous pulse)
 
     SERVO_DOWN_STATE = 1
     SERVO_UP_STATE = 0
@@ -135,7 +135,7 @@ class Ercf:
     VARS_ERCF_SWAP_STATISTICS        = "ercf_statistics_swaps"
     VARS_ERCF_SELECTOR_OFFSETS       = "ercf_selector_offsets"
 
-    DEFAULT_ENCODER_RESOLUTION = 0.67 # 0.67 is about the resolution of one pulse
+    DEFAULT_ENCODER_RESOLUTION = 0.67 * 17 / 11 # 0.67 is about the resolution of one pulse
     EMPTY_GATE_STATS_ENTRY = {'pauses': 0, 'loads': 0, 'load_distance': 0.0, 'load_delta': 0.0, 'unloads': 0, 'unload_distance': 0.0, 'unload_delta': 0.0, 'servo_retries': 0, 'load_failures': 0, 'unload_failures': 0}
 
     W3C_COLORS = ['aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet',
