@@ -1,0 +1,425 @@
+02:16:52 - - TRACE: Determined print status as: printing from print_stats
+02:16:52 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.5, 'min_headroom': 12.5, 'headroom': 22.5, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+02:18:20 - - TRACE: Determined print status as: printing from print_stats
+02:18:20 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.5, 'min_headroom': 12.5, 'headroom': 22.5, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+02:18:20 - DEBUG: Automatic clog detection: averaging down detection_length with new 10.0mm measurement
+02:18:20 - DEBUG: Automatic clog detection: reset detection_length to 11.9mm
+02:18:20 - DEBUG: Tool change initiated with standalone ERCF tip formation
+02:18:20 Tool change requested: T2
+02:18:20 ERCF not homed, homing it before continuing...
+02:18:20 Homing ERCF...
+02:18:20 - - TRACE: Setting ERCF gear motor step ratio to 1.000000
+02:18:20 - DEBUG: Moving up to 120.0mm to home a 6 channel ERCF
+02:18:26 - DEBUG: Selecting tool T2 on gate #2...
+02:18:27 - - TRACE: Setting ERCF gear motor step ratio to 0.998207
+02:18:27 Tool T2 enabled
+02:18:27 - DEBUG: Loading tool T2...
+02:18:27 Loading filament...
+02:18:27 ERCF [T2] >.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@0.0 mm)
+02:18:27 - DEBUG: Setting servo to down angle: 160
+02:18:27 requested to move at speed=25
+02:18:27 actually moved at speed=25
+02:18:27 requested to move at speed=25
+02:18:27 actually moved at speed=25
+02:18:27 requested to move at speed=25
+02:18:27 actually moved at speed=25
+02:18:27 requested to move at speed=25
+02:18:27 actually moved at speed=25
+02:18:27 requested to move at speed=None
+02:18:27 actually moved at speed=100.0
+02:18:30 - - TRACE: Initial load into encoder. Stepper: 'gear' moved 70.0mm, encoder measured 37.5mm (delta 32.5mm). Counter: @37.5mm
+02:18:30 ERCF [T2] >>>>> [encoder] >>........... [extruder] ... [sensor] ... [nozzle] (@37.5 mm)
+02:18:30 Heating extruder to minimum temp (220.0)
+02:19:39 - DEBUG: Loading bowden tube
+02:19:39 requested to move at speed=None
+02:19:39 actually moved at speed=300.0
+02:19:44 - - TRACE: Course loading move #1 into bowden. Stepper: 'gear' moved 917.1mm, encoder measured 911.4mm (delta 5.7mm). Counter: @948.9mm
+02:19:44 ERCF [T2] >>>>> [encoder] >>>>>>>...... [extruder] ... [sensor] ... [nozzle] (@948.9 mm)
+02:19:44 ERCF [T2] >>>>> [encoder] >>>>>>>>>>>>> [extruder] ... [sensor] ... [nozzle] (@948.9 mm)
+02:19:44 - DEBUG: Full length load, will home filament...
+02:19:47 ERCF [T2] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>| [sensor] ... [nozzle] (@974.3 mm)
+02:19:47 - DEBUG: Loading last 8.5mm to the nozzle...
+02:19:47 - DEBUG: Syncing gear stepper and extruder
+02:19:47 - DEBUG: Automatic clog detection: averaging down detection_length with new 10.0mm measurement
+02:19:47 - DEBUG: Automatic clog detection: reset detection_length to 11.4mm
+02:19:49 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): 9.2mm
+02:19:50 - - TRACE: Synchronously loading filament to nozzle. Stepper: 'synced' moved 8.5mm, encoder measured 8.7mm (delta -0.2mm). Counter: @983.0mm
+02:19:50 - DEBUG: Total measured movement: 8.7mm, total delta: -0.2mm
+02:19:50 ERCF [T2] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>> [sensor] >>> [nozzle] LOADED (@983.0 mm)
+02:19:50 ERCF load successful
+02:19:50 Loaded 983.0mm of filament
+02:19:50 ERCF Statistics:
+         9 swaps completed
+         4 minutes 43 seconds spent loading (average: 31 seconds)
+         4 minutes 34 seconds spent unloading (average: 30 seconds)
+         0 seconds spent paused (total pauses: 0)
+02:19:50 Gate Statistics:
+         #0: n/a, #1: n/a, #2: Marginal, #3: Good, #4: n/a, #5: n/a
+02:19:50 - DEBUG: 
+         Gate #0: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #1: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #2: Load: (monitored: 5483.9mm slippage: 0.5%); Unload: (monitored: 4423.4mm slippage: 1.6%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #3: Load: (monitored: 2699.1mm slippage: 0.1%); Unload: (monitored: 2654.3mm slippage: 0.4%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #4: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #5: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+02:39:47 - - TRACE: Determined print status as: printing from print_stats
+02:39:47 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 1064.7, 'detection_length': 11.4, 'min_headroom': 9.2, 'headroom': 11.4, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 99}
+02:39:47 - DEBUG: Automatic clog detection: maintaining headroom by adding 0.8mm to detection_length
+02:39:47 - DEBUG: Automatic clog detection: reset detection_length to 12.2mm
+02:39:47 - DEBUG: Tool change initiated with slicer forming tip
+02:39:47 Tool T2 is already ready
+02:39:47 ERCF Statistics:
+         9 swaps completed
+         4 minutes 43 seconds spent loading (average: 31 seconds)
+         4 minutes 34 seconds spent unloading (average: 30 seconds)
+         0 seconds spent paused (total pauses: 0)
+02:39:47 Gate Statistics:
+         #0: n/a, #1: n/a, #2: Marginal, #3: Good, #4: n/a, #5: n/a
+02:39:47 - DEBUG: 
+         Gate #0: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #1: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #2: Load: (monitored: 5483.9mm slippage: 0.5%); Unload: (monitored: 4423.4mm slippage: 1.6%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #3: Load: (monitored: 2699.1mm slippage: 0.1%); Unload: (monitored: 2654.3mm slippage: 0.4%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #4: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #5: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+02:39:47 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 1065.4, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+02:59:35 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 5399.3, 'detection_length': 12.2, 'min_headroom': 10.4, 'headroom': 12.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 97}
+02:59:35 - DEBUG: Unloading tool T2
+02:59:41 Unloading filament...
+02:59:41 ERCF [T2] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<< [sensor] <<< [nozzle] LOADED (@0.0 mm)
+02:59:41 - - TRACE: (Toolhead sensor detects filament)
+02:59:41 Forming tip...
+02:59:41 - DEBUG: Setting servo to up angle: 20
+02:59:42 - DEBUG: Spring in filament measured  3.3mm - adjusting encoder
+02:59:42 - DEBUG: Unsyncing gear stepper and extruder
+02:59:45 - - TRACE: After tip formation, encoder moved 35.49
+02:59:45 ERCF [T2] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<< [sensor] <.. [nozzle] (@34.8 mm)
+02:59:45 - DEBUG: Extracting filament from extruder
+02:59:45 - DEBUG: Setting servo to down angle: 160
+02:59:48 requested to move at speed=25
+02:59:48 actually moved at speed=25
+02:59:48 requested to move at speed=25
+02:59:48 actually moved at speed=25
+02:59:48 requested to move at speed=25
+02:59:48 actually moved at speed=25
+02:59:48 requested to move at speed=25
+02:59:48 actually moved at speed=25
+02:59:48 - DEBUG: Syncing gear stepper and extruder
+02:59:48 - DEBUG: Trying to exit the extruder to toolhead sensor, up to 13.5mm in 3.0mm steps
+02:59:49 - - TRACE: Step #1:. Stepper: 'synced' moved -3.0mm, encoder measured 4.7mm (delta -1.7mm). Counter: @39.5mm
+02:59:49 - - TRACE: Step #2:. Stepper: 'synced' moved -3.0mm, encoder measured 3.3mm (delta -0.3mm). Counter: @42.9mm
+02:59:50 - - TRACE: Step #3:. Stepper: 'synced' moved -3.0mm, encoder measured 2.7mm (delta 0.3mm). Counter: @45.5mm
+02:59:50 - - TRACE: Step #4:. Stepper: 'synced' moved -3.0mm, encoder measured 3.3mm (delta -0.3mm). Counter: @48.9mm
+02:59:50 ERCF [T2] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<| [sensor] ... [nozzle] (@48.9 mm)
+02:59:50 - DEBUG: Toolhead sensor reached after 4 moves
+02:59:53 - - TRACE: Move from toolhead sensor to exit. Stepper: 'synced' moved -40.1mm, encoder measured 39.5mm (delta 0.6mm). Counter: @88.4mm
+02:59:53 - DEBUG: Filament should be out of extruder
+02:59:53 ERCF [T2] <<<<< [encoder] <<<<<<<<<<<<< [extruder] ... [sensor] ... [nozzle] (@88.4 mm)
+02:59:53 - DEBUG: Unloading bowden tube
+02:59:53 - DEBUG: Moving the gear and extruder motors in sync for -10.0mm
+02:59:53 - DEBUG: Unsyncing gear stepper and extruder
+02:59:54 - - TRACE: Sync unload. Stepper: 'both' moved -10.0mm, encoder measured 9.4mm (delta 0.6mm). Counter: @97.8mm
+02:59:54 requested to move at speed=None
+02:59:54 actually moved at speed=300.0
+02:59:59 - - TRACE: Course unloading move #1 from bowden. Stepper: 'gear' moved -885.2mm, encoder measured 869.2mm (delta 16.0mm). Counter: @967.0mm
+02:59:59 ERCF [T2] <<<<< [encoder] <<<<<<<...... [extruder] ... [sensor] ... [nozzle] (@967.0 mm)
+02:59:59 Warning: Excess slippage was detected in bowden tube unload. Gear moved 885.2mm, Encoder delta 16.0mm
+02:59:59 ERCF [T2] <<<<< [encoder] <<........... [extruder] ... [sensor] ... [nozzle] (@967.0 mm)
+02:59:59 - DEBUG: Slow unload of the encoder
+02:59:59 requested to move at speed=None
+02:59:59 actually moved at speed=100.0
+03:00:00 - - TRACE: Unloading step #1 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 14.7mm (delta 0.3mm). Counter: @981.7mm
+03:00:00 requested to move at speed=None
+03:00:00 actually moved at speed=100.0
+03:00:01 - - TRACE: Unloading step #2 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 14.7mm (delta 0.3mm). Counter: @996.4mm
+03:00:01 requested to move at speed=None
+03:00:01 actually moved at speed=100.0
+03:00:02 - - TRACE: Unloading step #3 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 15.4mm (delta -0.4mm). Counter: @1011.8mm
+03:00:02 requested to move at speed=None
+03:00:02 actually moved at speed=100.0
+03:00:04 - - TRACE: Unloading step #4 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 0.0mm (delta 15.0mm). Counter: @1011.8mm
+03:00:04 ERCF [T2] <<<.. [encoder] ............. [extruder] ... [sensor] ... [nozzle] (@1011.8 mm)
+03:00:04 requested to move at speed=None
+03:00:04 actually moved at speed=100.0
+03:00:04 - - TRACE: Final parking. Stepper: 'gear' moved -12.0mm, encoder measured 0.0mm (delta 12.0mm). Counter: @1011.8mm
+03:00:04 ERCF [T2] <.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@1011.8 mm)
+03:00:04 - DEBUG: Setting servo to up angle: 20
+03:00:05 Unloaded 1011.8mm of filament
+03:00:05 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+03:00:11 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+03:30:11 - - TRACE: Setting ERCF gear motor step ratio to 1.000000
+04:31:34 - - TRACE: Determined print status as: printing from print_stats
+04:31:34 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+04:32:08 - DEBUG: ERCF Shutdown
+04:32:13 - DEBUG: Loaded persisted ERCF state, level: 4
+04:32:13 Warning: Some persisted state was ignored because it contained errors:
+         Incorrect number of gates specified in ercf_selector_offsets
+04:32:14 - - TRACE: Determined print status as: standby from print_stats
+04:32:15 (\_/)
+         ( *,*)
+         (")_(") ERCF Ready
+04:32:15 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+04:32:26 - - TRACE: Determined print status as: printing from print_stats
+04:32:26 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+04:34:14 - - TRACE: Determined print status as: printing from print_stats
+04:34:14 Unknown filament position, recovering state...
+04:34:14 - - TRACE: (Toolhead sensor does not detect filament)
+04:34:14 - DEBUG: Checking for filament in encoder...
+04:34:14 - - TRACE: (Toolhead sensor does not detect filament)
+04:34:14 - DEBUG: Setting servo to down angle: 160
+04:34:16 requested to move at speed=25
+04:34:16 actually moved at speed=25
+04:34:16 requested to move at speed=25
+04:34:16 actually moved at speed=25
+04:34:16 requested to move at speed=25
+04:34:16 actually moved at speed=25
+04:34:16 requested to move at speed=25
+04:34:16 actually moved at speed=25
+04:34:16 requested to move at speed=None
+04:34:16 actually moved at speed=100.0
+04:34:16 requested to move at speed=None
+04:34:16 actually moved at speed=100.0
+04:34:17 - - TRACE: After buzzing gear motor, encoder moved 0.00
+04:34:17 - DEBUG: Filament not detected in encoder after buzzing gear motor
+04:34:17 ERCF [T?] >.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@0.0 mm)
+04:34:17 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 12.2, 'min_headroom': 12.2, 'headroom': 22.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+04:34:17 - DEBUG: Automatic clog detection: averaging down detection_length with new 10.0mm measurement
+04:34:17 - DEBUG: Automatic clog detection: reset detection_length to 11.6mm
+04:34:17 - DEBUG: Tool change initiated with standalone ERCF tip formation
+04:34:17 Tool change requested: T3
+04:34:17 - DEBUG: Loading tool T3...
+04:34:17 - DEBUG: Selecting tool T3 on gate #3...
+04:34:17 - DEBUG: Setting servo to up angle: 20
+04:34:19 - - TRACE: Setting ERCF gear motor step ratio to 0.997789
+04:34:19 Tool T3 enabled
+04:34:19 Loading filament...
+04:34:19 ERCF [T3] >.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@0.0 mm)
+04:34:19 - DEBUG: Setting servo to down angle: 160
+04:34:19 requested to move at speed=25
+04:34:19 actually moved at speed=25
+04:34:19 requested to move at speed=25
+04:34:19 actually moved at speed=25
+04:34:19 requested to move at speed=25
+04:34:19 actually moved at speed=25
+04:34:19 requested to move at speed=25
+04:34:19 actually moved at speed=25
+04:34:19 requested to move at speed=None
+04:34:19 actually moved at speed=100.0
+04:34:21 - - TRACE: Initial load into encoder. Stepper: 'gear' moved 70.0mm, encoder measured 42.2mm (delta 27.8mm). Counter: @42.2mm
+04:34:21 ERCF [T3] >>>>> [encoder] >>........... [extruder] ... [sensor] ... [nozzle] (@42.2 mm)
+04:34:21 Heating extruder to minimum temp (220.0)
+04:35:30 - DEBUG: Loading bowden tube
+04:35:30 requested to move at speed=None
+04:35:30 actually moved at speed=300.0
+04:35:35 - - TRACE: Course loading move #1 into bowden. Stepper: 'gear' moved 912.4mm, encoder measured 912.1mm (delta 0.4mm). Counter: @954.2mm
+04:35:35 ERCF [T3] >>>>> [encoder] >>>>>>>...... [extruder] ... [sensor] ... [nozzle] (@954.2 mm)
+04:35:35 ERCF [T3] >>>>> [encoder] >>>>>>>>>>>>> [extruder] ... [sensor] ... [nozzle] (@954.2 mm)
+04:35:35 - DEBUG: Full length load, will home filament...
+04:35:38 ERCF [T3] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>| [sensor] ... [nozzle] (@979.7 mm)
+04:35:38 - DEBUG: Loading last 8.5mm to the nozzle...
+04:35:38 - DEBUG: Syncing gear stepper and extruder
+04:35:40 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): 9.6mm
+04:35:40 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): 7.3mm
+04:35:41 - - TRACE: Synchronously loading filament to nozzle. Stepper: 'synced' moved 8.5mm, encoder measured 9.4mm (delta -0.9mm). Counter: @989.1mm
+04:35:41 - DEBUG: Total measured movement: 9.4mm, total delta: -0.9mm
+04:35:41 ERCF [T3] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>> [sensor] >>> [nozzle] LOADED (@989.1 mm)
+04:35:41 ERCF load successful
+04:35:41 Loaded 989.1mm of filament
+04:35:41 ERCF Statistics:
+         10 swaps completed
+         6 minutes 5 seconds spent loading (average: 36 seconds)
+         4 minutes 34 seconds spent unloading (average: 27 seconds)
+         0 seconds spent paused (total pauses: 0)
+04:35:41 Gate Statistics:
+         #0: n/a, #1: n/a, #2: Marginal, #3: Good, #4: n/a, #5: n/a
+04:35:41 - DEBUG: 
+         Gate #0: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #1: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #2: Load: (monitored: 5483.9mm slippage: 0.5%); Unload: (monitored: 4423.4mm slippage: 1.6%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #3: Load: (monitored: 3611.5mm slippage: 0.1%); Unload: (monitored: 2654.3mm slippage: 0.4%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #4: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #5: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+04:48:41 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 989.1, 'detection_length': 11.6, 'min_headroom': 7.3, 'headroom': 11.6, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 39}
+04:49:00 - - TRACE: Determined print status as: printing from print_stats
+04:49:00 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 989.1, 'detection_length': 11.6, 'min_headroom': 11.6, 'headroom': 21.6, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+04:57:10 - - TRACE: Determined print status as: printing from print_stats
+04:57:10 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 1037.3, 'detection_length': 11.6, 'min_headroom': 11.6, 'headroom': 11.6, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 100}
+04:57:10 - DEBUG: Automatic clog detection: averaging down detection_length with new 10.0mm measurement
+04:57:10 - DEBUG: Automatic clog detection: reset detection_length to 11.2mm
+04:57:10 - DEBUG: Tool change initiated with slicer forming tip
+04:57:10 Tool T3 is already ready
+04:57:10 ERCF Statistics:
+         10 swaps completed
+         6 minutes 5 seconds spent loading (average: 36 seconds)
+         4 minutes 34 seconds spent unloading (average: 27 seconds)
+         0 seconds spent paused (total pauses: 0)
+04:57:10 Gate Statistics:
+         #0: n/a, #1: n/a, #2: Marginal, #3: Good, #4: n/a, #5: n/a
+04:57:10 - DEBUG: 
+         Gate #0: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #1: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #2: Load: (monitored: 5483.9mm slippage: 0.5%); Unload: (monitored: 4423.4mm slippage: 1.6%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #3: Load: (monitored: 3611.5mm slippage: 0.1%); Unload: (monitored: 2654.3mm slippage: 0.4%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #4: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #5: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+04:57:10 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 1037.3, 'detection_length': 11.2, 'min_headroom': 11.2, 'headroom': 21.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+05:04:15 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): 9.8mm
+05:04:45 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 2323.7, 'detection_length': 11.2, 'min_headroom': 9.8, 'headroom': 11.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 100}
+05:04:45 - DEBUG: Unloading tool T3
+05:04:51 Unloading filament...
+05:04:51 ERCF [T3] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<< [sensor] <<< [nozzle] LOADED (@0.0 mm)
+05:04:51 - - TRACE: (Toolhead sensor detects filament)
+05:04:51 Forming tip...
+05:04:51 - DEBUG: Setting servo to up angle: 20
+05:04:52 - DEBUG: Spring in filament measured  2.0mm - adjusting encoder
+05:04:52 - DEBUG: Unsyncing gear stepper and extruder
+05:04:55 - - TRACE: After tip formation, encoder moved 34.82
+05:04:55 ERCF [T3] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<< [sensor] <.. [nozzle] (@34.8 mm)
+05:04:55 - DEBUG: Extracting filament from extruder
+05:04:55 - DEBUG: Setting servo to down angle: 160
+05:04:58 requested to move at speed=25
+05:04:58 actually moved at speed=25
+05:04:58 requested to move at speed=25
+05:04:58 actually moved at speed=25
+05:04:58 requested to move at speed=25
+05:04:58 actually moved at speed=25
+05:04:58 requested to move at speed=25
+05:04:58 actually moved at speed=25
+05:04:58 - DEBUG: Syncing gear stepper and extruder
+05:04:58 - DEBUG: Trying to exit the extruder to toolhead sensor, up to 13.5mm in 3.0mm steps
+05:04:59 - - TRACE: Step #1:. Stepper: 'synced' moved -3.0mm, encoder measured 4.0mm (delta -1.0mm). Counter: @38.8mm
+05:04:59 - - TRACE: Step #2:. Stepper: 'synced' moved -3.0mm, encoder measured 4.0mm (delta -1.0mm). Counter: @42.9mm
+05:05:00 - - TRACE: Step #3:. Stepper: 'synced' moved -3.0mm, encoder measured 2.7mm (delta 0.3mm). Counter: @45.5mm
+05:05:01 - - TRACE: Step #4:. Stepper: 'synced' moved -3.0mm, encoder measured 2.7mm (delta 0.3mm). Counter: @48.2mm
+05:05:01 ERCF [T3] <<<<< [encoder] <<<<<<<<<<<<< [extruder] <<| [sensor] ... [nozzle] (@48.2 mm)
+05:05:01 - DEBUG: Toolhead sensor reached after 4 moves
+05:05:03 - - TRACE: Move from toolhead sensor to exit. Stepper: 'synced' moved -40.1mm, encoder measured 39.5mm (delta 0.6mm). Counter: @87.7mm
+05:05:03 - DEBUG: Filament should be out of extruder
+05:05:03 ERCF [T3] <<<<< [encoder] <<<<<<<<<<<<< [extruder] ... [sensor] ... [nozzle] (@87.7 mm)
+05:05:03 - DEBUG: Unloading bowden tube
+05:05:03 - DEBUG: Moving the gear and extruder motors in sync for -10.0mm
+05:05:03 - DEBUG: Unsyncing gear stepper and extruder
+05:05:04 - - TRACE: Sync unload. Stepper: 'both' moved -10.0mm, encoder measured 10.7mm (delta -0.7mm). Counter: @98.4mm
+05:05:04 requested to move at speed=None
+05:05:04 actually moved at speed=300.0
+05:05:10 - - TRACE: Course unloading move #1 from bowden. Stepper: 'gear' moved -883.9mm, encoder measured 878.6mm (delta 5.3mm). Counter: @977.0mm
+05:05:10 ERCF [T3] <<<<< [encoder] <<<<<<<...... [extruder] ... [sensor] ... [nozzle] (@977.0 mm)
+05:05:10 ERCF [T3] <<<<< [encoder] <<........... [extruder] ... [sensor] ... [nozzle] (@977.0 mm)
+05:05:10 - DEBUG: Slow unload of the encoder
+05:05:10 requested to move at speed=None
+05:05:10 actually moved at speed=100.0
+05:05:11 - - TRACE: Unloading step #1 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 14.7mm (delta 0.3mm). Counter: @991.7mm
+05:05:11 requested to move at speed=None
+05:05:11 actually moved at speed=100.0
+05:05:12 - - TRACE: Unloading step #2 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 14.1mm (delta 0.9mm). Counter: @1005.8mm
+05:05:12 requested to move at speed=None
+05:05:12 actually moved at speed=100.0
+05:05:13 - - TRACE: Unloading step #3 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 14.7mm (delta 0.3mm). Counter: @1020.5mm
+05:05:13 requested to move at speed=None
+05:05:13 actually moved at speed=100.0
+05:05:14 - - TRACE: Unloading step #4 from encoder. Stepper: 'gear' moved -15.0mm, encoder measured 2.7mm (delta 12.3mm). Counter: @1023.2mm
+05:05:14 ERCF [T3] <<<.. [encoder] ............. [extruder] ... [sensor] ... [nozzle] (@1023.2 mm)
+05:05:14 requested to move at speed=None
+05:05:14 actually moved at speed=100.0
+05:05:15 - - TRACE: Final parking. Stepper: 'gear' moved -14.7mm, encoder measured 0.0mm (delta 14.7mm). Counter: @1023.2mm
+05:05:15 ERCF [T3] <.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@1023.2 mm)
+05:05:15 - DEBUG: Setting servo to up angle: 20
+05:05:15 Unloaded 1023.2mm of filament
+05:05:15 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 11.2, 'min_headroom': 11.2, 'headroom': 21.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+05:05:22 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 11.2, 'min_headroom': 11.2, 'headroom': 21.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+05:09:22 - - TRACE: Determined print status as: printing from print_stats
+05:09:22 - DEBUG: Tool change initiated with standalone ERCF tip formation
+05:09:22 Tool change requested: T0
+05:09:22 - DEBUG: Loading tool T0...
+05:09:22 - DEBUG: Selecting tool T0 on gate #0...
+05:09:22 - - TRACE: Determined print status as: printing from print_stats
+05:09:22 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 11.2, 'min_headroom': 11.2, 'headroom': 21.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+05:09:25 - - TRACE: Setting ERCF gear motor step ratio to 1.000000
+05:09:25 Tool T0 enabled
+05:09:25 Loading filament...
+05:09:25 ERCF [T0] >.... [encoder] ............. [extruder] ... [sensor] ... [nozzle] UNLOADED (@0.0 mm)
+05:09:25 - DEBUG: Setting servo to down angle: 160
+05:09:25 requested to move at speed=25
+05:09:25 actually moved at speed=25
+05:09:25 requested to move at speed=25
+05:09:25 actually moved at speed=25
+05:09:25 requested to move at speed=25
+05:09:25 actually moved at speed=25
+05:09:25 requested to move at speed=25
+05:09:25 actually moved at speed=25
+05:09:25 requested to move at speed=None
+05:09:25 actually moved at speed=100.0
+05:09:27 - - TRACE: Initial load into encoder. Stepper: 'gear' moved 70.0mm, encoder measured 37.5mm (delta 32.5mm). Counter: @37.5mm
+05:09:27 ERCF [T0] >>>>> [encoder] >>........... [extruder] ... [sensor] ... [nozzle] (@37.5 mm)
+05:09:27 Heating extruder to minimum temp (220.0)
+05:10:17 - DEBUG: Loading bowden tube
+05:10:17 requested to move at speed=None
+05:10:17 actually moved at speed=50.0
+05:10:36 - - TRACE: Course loading move #1 into bowden. Stepper: 'gear' moved 917.1mm, encoder measured 911.4mm (delta 5.7mm). Counter: @948.9mm
+05:10:36 ERCF [T0] >>>>> [encoder] >>>>>>>...... [extruder] ... [sensor] ... [nozzle] (@948.9 mm)
+05:10:36 ERCF [T0] >>>>> [encoder] >>>>>>>>>>>>> [extruder] ... [sensor] ... [nozzle] (@948.9 mm)
+05:10:36 - DEBUG: Full length load, will home filament...
+05:10:39 ERCF [T0] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>| [sensor] ... [nozzle] (@964.3 mm)
+05:10:39 - DEBUG: Loading last 8.5mm to the nozzle...
+05:10:39 - DEBUG: Syncing gear stepper and extruder
+05:10:39 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): -329.0mm
+05:10:40 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): -331.5mm
+05:10:40 - DEBUG: Automatic clog detection: new min_headroom (< 10.0mm desired): -334.1mm
+05:10:41 - - TRACE: Synchronously loading filament to nozzle. Stepper: 'synced' moved 8.5mm, encoder measured 9.4mm (delta -0.9mm). Counter: @973.7mm
+05:10:41 - DEBUG: Total measured movement: 9.4mm, total delta: -0.9mm
+05:10:41 ERCF [T0] >>>>> [encoder] >>>>>>>>>>>>> [extruder] >>> [sensor] >>> [nozzle] LOADED (@973.7 mm)
+05:10:41 ERCF load successful
+05:10:41 Loaded 973.7mm of filament
+05:10:41 ERCF Statistics:
+         11 swaps completed
+         7 minutes 22 seconds spent loading (average: 40 seconds)
+         4 minutes 58 seconds spent unloading (average: 27 seconds)
+         0 seconds spent paused (total pauses: 0)
+05:10:41 Gate Statistics:
+         #0: Good, #1: n/a, #2: Marginal, #3: Good, #4: n/a, #5: n/a
+05:10:41 - DEBUG: 
+         Gate #0: Load: (monitored: 917.1mm slippage: 0.6%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #1: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #2: Load: (monitored: 5483.9mm slippage: 0.5%); Unload: (monitored: 4423.4mm slippage: 1.6%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #3: Load: (monitored: 3611.5mm slippage: 0.1%); Unload: (monitored: 3538.2mm slippage: 0.4%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #4: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+         Gate #5: Load: (monitored: 0.0mm slippage: 0.0%); Unload: (monitored: 0.0mm slippage: 0.0%); Failures: (servo: 0 load: 0 unload: 0 pauses: 0)
+05:10:42 - - TRACE: Determined print status as: printing from print_stats
+05:17:48 Issue on tool T0
+05:17:52 - DEBUG: Saving toolhead position
+05:17:52 - DEBUG: Lifting toolhead 5.0mm
+05:17:52 - DEBUG: Checking if this is a clog or a runout (state 8)...
+05:17:52 - DEBUG: Unsyncing gear stepper and extruder
+05:17:52 requested to move at speed=None
+05:17:52 actually moved at speed=100.0
+05:17:52 requested to move at speed=None
+05:17:52 actually moved at speed=100.0
+05:17:53 - - TRACE: After buzzing gear motor, encoder moved 4.02
+05:17:53 - DEBUG: Setting servo to up angle: 20
+05:17:54 - DEBUG: Spring in filament measured  0.7mm - adjusting encoder
+05:17:54 - DEBUG: Disabled encoder sensor. Status: {'encoder_pos': 1060.7, 'detection_length': 11.2, 'min_headroom': -334.1, 'headroom': 11.7, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 100}
+05:17:54 - DEBUG: Automatic clog detection: maintaining headroom by adding 10.0mm to detection_length
+05:17:54 - DEBUG: Automatic clog detection: reset detection_length to 21.2mm
+05:17:54 - - TRACE: Determined print status as: printing from print_stats
+05:17:54 - DEBUG: Asked to save toolhead position but it is already saved. Ignored
+05:17:54 An issue with the ERCF has been detected. Print paused
+         Reason: A clog has been detected and requires manual intervention
+05:17:54 When you intervene to fix the issue, first call 'ERCF_UNLOCK'
+05:24:56 Unlocking the ERCF
+05:24:56 - - TRACE: Determined print status as: paused from print_stats
+05:24:56 When the issue is addressed you can resume print
+05:24:58 - DEBUG: ERCF_RESUME wrapper called
+05:24:58 - - TRACE: Determined print status as: paused from print_stats
+05:24:58 - DEBUG: Restoring toolhead position
+05:24:58 - - TRACE: Determined print status as: paused from print_stats
+05:24:58 - DEBUG: Enabled encoder sensor. Status: {'encoder_pos': 0.0, 'detection_length': 21.2, 'min_headroom': 21.2, 'headroom': 31.2, 'desired_headroom': 10.0, 'detection_mode': 2, 'enabled': True, 'flow_rate': 0}
+05:24:58 - DEBUG: Setting servo to down angle: 160
+05:25:01 requested to move at speed=25
+05:25:01 actually moved at speed=25
+05:25:01 requested to move at speed=25
+05:25:01 actually moved at speed=25
+05:25:01 requested to move at speed=25
+05:25:01 actually moved at speed=25
+05:25:01 requested to move at speed=25
+05:25:01 actually moved at speed=25
+05:25:01 - DEBUG: Syncing gear stepper and extruder
